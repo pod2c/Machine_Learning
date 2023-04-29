@@ -107,7 +107,7 @@ print(list(vocab.token_to_idx.items())[:10])
 ```
 运行结果：
 
-
+<img width="200%" src="https://github.com/pod2c/Machine_Learning/blob/98597cdf14397828cff2f6c65d17f4f89c804990/DeepLearning/graphs/Text%20Preprocessing/result1.png" />
 
 ### 五. 将文本行转化为数字索引列表
 ```python
