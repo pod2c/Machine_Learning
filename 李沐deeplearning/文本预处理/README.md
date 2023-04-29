@@ -106,3 +106,37 @@ vocab = Vocab(tokens)
 print(list(vocab.token_to_idx.items())[:10])
 ```
 运行结果：
+
+
+
+### 五. 将文本行转化为数字索引列表
+```python
+for i in [0, 10]:
+    print('word:',tokens[i])
+    print('index:',vocab[tokens[i]])
+```
+
+运行结果：
+
+
+
+### 六. 整合所有功能
+现在将之前的所有功能合并到一个函数load_corpus_time_machine()当中，此函数最终返回一个词元的索引列表corpus和一个词汇表vocabu。
+```python
+def load_corpus_time_machine(max_token=-1):
+    lines = read_book() #导入文本数据
+    tokens = tokenize(lines, 'char') #拆分文本数据转为词元
+    vocabu = Vocab(tokens) #构造词汇表
+    corpus = [vocabu[token] for line in tokens for token in line] #得到词元索引列表
+    
+    if (max_token > 0):
+        corpus = corpus[:max_token] #按设置好的数量提取需要用来训练的词元
+    return vocabu, corpus #返回词汇表以及数字索引列表
+
+vocabu, corpus = load_corpus_time_machine()
+len(vocabu), len(corpus)
+```
+需要注意的是：
+
+1. 为了简化训练，这里使用字符（而不是单词）实现文本词元化；
+2. 时光机器数据集中的每个文本行不一定是一个句子或一个段落，还可能是一个单词，因此返回的corpus仅处理为单个列表，而不是使用多词元列表构成的一个列表。
