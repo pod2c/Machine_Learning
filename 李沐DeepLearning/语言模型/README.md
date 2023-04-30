@@ -64,7 +64,11 @@ print(vocab.token_freqs[:10])
 freq = [freq for token, freq in vocab.token_freqs]
 d2l.plot(freq, xlabel='token: x', ylabel='freq: y', xscale='log', yscale='log')
 ```
-<img width="200%" src="https://github.com/pod2c/Machine_Learning/blob/98597cdf14397828cff2f6c65d17f4f89c804990/DeepLearning/graphs/Text%20Preprocessing/result1.png" />
+<div align=center>
+<img src="https://github.com/pod2c/Machine_Learning/blob/87ead1b3081c0ec2111426a0d759b86db694e3c6/%E6%9D%8E%E6%B2%90DeepLearning/%E5%9B%BE%E7%89%87/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/fig1.png"/></br>
+图1：一元语法词频图
+</div>
+
 
 某些出现频次过高的词元会被划分为停用词（Stop Words）。停用词是指在文本处理中经常要忽略的词汇，因为这些词通常不对文本的意义产生重要贡献。常见的停用词包括代词、介词、连词、冠词等。另外，在英文中还有一些高频词如 "the" "and" "a" 等被认为是停用词。
 
@@ -85,7 +89,10 @@ bi_freq = [freq for token, freq in bi_vocab.token_freqs]
 tri_freq = [freq for token, freq in tri_vocab.token_freqs]
 d2l.plot([freq, bi_freq, tri_freq], xlabel='token: x', ylabel='freq: y', xscale='log', yscale='log', legend=['uni_freq','bi_freq','tri_freq'])
 ```
-<img width="200%" src="https://github.com/pod2c/Machine_Learning/blob/98597cdf14397828cff2f6c65d17f4f89c804990/DeepLearning/graphs/Text%20Preprocessing/result1.png" />
+<div align=center>
+<img src="https://github.com/pod2c/Machine_Learning/blob/87ead1b3081c0ec2111426a0d759b86db694e3c6/%E6%9D%8E%E6%B2%90DeepLearning/%E5%9B%BE%E7%89%87/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/fig2.png"/></br>
+图2：词频图
+</div>
 
 通过词频图可以看出，词频以一种明确的方式衰减。在剔除前几个单词后，后续的单词遵循双对数坐标上的一条直线衰减。这意味着词频满足齐普夫定律（Zipf's Law），即第 
  个词的词频 
@@ -107,7 +114,10 @@ $\log n_i=-\alpha \log i + c$  (4)
 由于文本序列的长度可以被任意分割，在这里可以定义一个时间步数 
  ，利用这个时间步数将文本序列分割为若干个具有相同时间步数的子序列。并且可以任意选择偏移量来指示分割开始的初始位置。例子如下，设$n=5$，则有
 
-<img width="200%" src="https://github.com/pod2c/Machine_Learning/blob/98597cdf14397828cff2f6c65d17f4f89c804990/DeepLearning/graphs/Text%20Preprocessing/result1.png" />
+<div align=center>
+<img src="https://github.com/pod2c/Machine_Learning/blob/87ead1b3081c0ec2111426a0d759b86db694e3c6/%E6%9D%8E%E6%B2%90DeepLearning/%E5%9B%BE%E7%89%87/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/fig3.png"/></br>
+图3：分割出来的子序列（图源：Dive to Deep Learning）
+</div>
 
 如图3，不同的偏移量会导致产生不同的子序列。为了保证随机性，在这里选择随机偏移量作为起始位置。下面将实现随机采样和顺序分区来分割文本序列。
 
@@ -146,7 +156,10 @@ for X, Y in seq_data_iter_random(seq, 2, 5):
 ```
 运行结果：
 
-<img width="200%" src="https://github.com/pod2c/Machine_Learning/blob/98597cdf14397828cff2f6c65d17f4f89c804990/DeepLearning/graphs/Text%20Preprocessing/result1.png" />
+<div align=center>
+<img src="https://github.com/pod2c/Machine_Learning/blob/87ead1b3081c0ec2111426a0d759b86db694e3c6/%E6%9D%8E%E6%B2%90DeepLearning/%E5%9B%BE%E7%89%87/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/fig4.png"/></br>
+图4：随机采样
+</div>
 
 从图4可以看出，一共生成了3组子序列，并且每一组序列里的特征都是随机采样的，任意相邻的两条子序列在原始长序列中不相邻。
 
@@ -174,7 +187,10 @@ def seq_data_iter_sequential(corpus, batch_size, num_steps):
 
 在之前生成的随机长序列上测试效果：
 
-<img width="200%" src="https://github.com/pod2c/Machine_Learning/blob/98597cdf14397828cff2f6c65d17f4f89c804990/DeepLearning/graphs/Text%20Preprocessing/result1.png" />
+<div align=center>
+<img src="https://github.com/pod2c/Machine_Learning/blob/87ead1b3081c0ec2111426a0d759b86db694e3c6/%E6%9D%8E%E6%B2%90DeepLearning/%E5%9B%BE%E7%89%87/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/fig5.png"/></br>
+图5：顺序分区
+</div>
 
 由图5可知，同样一共生成了三组子序列，可以看出其中两两相邻的子序列在原始长序列上也是相邻的。
 
